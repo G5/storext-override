@@ -6,6 +6,7 @@ This has a specific use case: you want to have another model, most likely a `Set
 
 ```ruby
 class Computer < ActiveRecord::Base
+  # If `data` is a PostgreSQL htsore or json store, you don't need to define `store` below.
   store :data, coder: JSON
   include Storext.model
 
@@ -15,6 +16,7 @@ class Computer < ActiveRecord::Base
 end
 
 class Phone < ActiveRecord::Base
+  # If `data` is a PostgreSQL htsore or json store, you don't need to define `store` below.
   store :data, coder: JSON
 
   belongs_to :computer
