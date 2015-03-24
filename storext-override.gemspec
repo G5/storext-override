@@ -7,11 +7,11 @@ require "storext/override/version"
 Gem::Specification.new do |s|
   s.name        = "storext-override"
   s.version     = Storext::Override::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of StorextOverride."
-  s.description = "TODO: Description of StorextOverride."
+  s.authors     = ["G5", "Ramon Tayag", "JP Moral"]
+  s.email       = ["la.team@g5search.com", "ramon.tayag@gmail.com"]
+  s.homepage    = "https://github.com/g5/storext-override"
+  s.summary     = "Mimic and be able to override another Storext model"
+  s.description = "Mimic and be able to override another Storext model"
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
