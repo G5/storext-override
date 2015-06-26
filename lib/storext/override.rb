@@ -62,7 +62,7 @@ module Storext
 
       def storext_overrider_define_writer(column_name, attr)
         define_method :"#{attr}_with_override_control=" do |*args|
-          if send(:"override_#{attr}") == false
+          if instance_variable_get("@override_#{attr}") == false
             destroy_key(column_name, attr)
           else
             send(:"#{attr}_without_override_control=", *args)
@@ -80,8 +80,15 @@ module Storext
         end
 
         define_method :"override_#{attr}" do
-          instance_variable_get(ivar)
+          value = instance_variable_get(ivar)
+          if value.nil?
+            send(column_name).has_key?(attr)
+          else
+            value
+          end
         end
+
+        alias_method "override_#{attr}?", :"override_#{attr}"
       end
     end
 

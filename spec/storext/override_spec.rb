@@ -65,4 +65,27 @@ describe Storext::Override do
     end
   end
 
+  context "reading override_*" do
+    let(:computer) { Komputer.create(manufacturer: "Dell") }
+    subject { phone.override_manufacturer }
+
+    context "the key exists" do
+      let(:phone) { Phone.create(computer: computer, manufacturer: "Compaq") }
+      it { is_expected.to be true }
+    end
+
+    context "the key does not exist" do
+      let(:phone) { Phone.create(computer: computer) }
+      it { is_expected.to be false }
+    end
+  end
+
+  describe "override_*?" do
+    it "is aliased to override_*" do
+      phone = Phone.new
+      expect(phone.method(:override_manufacturer)).
+        to eq phone.method(:override_manufacturer?)
+    end
+  end
+
 end
