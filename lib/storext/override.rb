@@ -49,13 +49,14 @@ module Storext
       end
 
       def storext_overrider_define_reader(association_name, column_name, attr)
-        define_method attr do |*args|
+        define_method :"#{attr}_with_parent_default" do |*args|
           if send(column_name).has_key?(attr)
-            super(*args)
+            send(:"#{attr}_without_parent_default", *args)
           else
             send(association_name).send(attr)
           end
         end
+        alias_method_chain :"#{attr}", :parent_default
       end
 
       def storext_overrider_define_writer(column_name, attr)
