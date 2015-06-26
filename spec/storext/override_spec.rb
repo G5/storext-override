@@ -80,6 +80,11 @@ describe Storext::Override do
     end
   end
 
+  context "override_* when the association it belongs to is nil" do
+    subject { Phone.new.manufacturer }
+    it { is_expected.to be_nil }
+  end
+
   context "reading override_*" do
     let(:computer) { Komputer.create(manufacturer: "Dell") }
     subject { phone.override_manufacturer }

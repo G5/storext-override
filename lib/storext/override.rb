@@ -54,7 +54,9 @@ module Storext
           if storext_has_key?(column_name, attr)
             send(:"#{attr}_without_parent_default", *args)
           else
-            send(association_name).send(attr)
+            if association = send(association_name)
+              association.send(attr)
+            end
           end
         end
         alias_method_chain :"#{attr}", :parent_default
