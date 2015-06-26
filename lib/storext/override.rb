@@ -45,6 +45,7 @@ module Storext
         )
 
         storext_overrider_define_reader(association_name, column_name, attr)
+        storext_overrider_define_writer(column_name, attr)
       end
 
       def storext_overrider_define_reader(association_name, column_name, attr)
@@ -55,6 +56,13 @@ module Storext
             send(association_name).send(attr)
           end
         end
+      end
+
+      def storext_overrider_define_writer(column_name, attr)
+        define_method :"#{attr}_with_override_control=" do |*args|
+          send(:"#{attr}_without_override_control=", *args)
+        end
+        alias_method_chain :"#{attr}=", :override_control
       end
     end
 
