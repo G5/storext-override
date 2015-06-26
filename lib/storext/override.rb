@@ -18,7 +18,7 @@ module Storext
         storext_definitions = association_class.storext_definitions
         storext_definitions.each do |attr, attr_definition|
           if attr_definition[:column] == column_name
-            storext_overrider_define_reader(
+            storext_overrider_accessor(
               association_name,
               column_name,
               attr,
@@ -36,7 +36,7 @@ module Storext
         end
       end
 
-      def storext_overrider_define_reader(association_name, column_name, attr, attr_definition)
+      def storext_overrider_accessor(association_name, column_name, attr, attr_definition)
         self.store_attribute(
           column_name,
           attr,
