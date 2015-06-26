@@ -45,7 +45,11 @@ module Storext
         )
 
         define_method attr do |*args|
-          super(*args) || send(association_name).send(attr)
+          if send(column_name).has_key?(attr)
+            super(*args)
+          else
+            send(association_name).send(attr)
+          end
         end
       end
     end

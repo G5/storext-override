@@ -17,4 +17,10 @@ describe Storext::Override do
     expect(phone.manufacturer).to eq "Compaq"
   end
 
+  it "can override the parent using `nil`" do
+    computer = Komputer.create(manufacturer: "Dell")
+    phone = Phone.create(computer: computer, manufacturer: nil)
+    expect(phone.manufacturer).to be_nil
+  end
+
 end
