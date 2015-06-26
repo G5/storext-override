@@ -1,3 +1,7 @@
+# TBA
+
+- Fix issue when reading from `nil` association
+
 # 0.1.0
 
 - Fix: if overriders sets the value to `nil`, do not return the parent's value
