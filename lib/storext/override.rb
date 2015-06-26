@@ -51,7 +51,7 @@ module Storext
 
       def storext_overrider_define_reader(association_name, column_name, attr)
         define_method :"#{attr}_with_parent_default" do |*args|
-          if send(column_name).has_key?(attr)
+          if storext_has_key?(column_name, attr)
             send(:"#{attr}_without_parent_default", *args)
           else
             send(association_name).send(attr)
@@ -82,7 +82,7 @@ module Storext
         define_method :"override_#{attr}" do
           value = instance_variable_get(ivar)
           if value.nil?
-            send(column_name).has_key?(attr)
+            storext_has_key?(column_name, attr)
           else
             value
           end
