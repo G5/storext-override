@@ -1,3 +1,8 @@
+# TBA
+
+- Fix: if overriders sets the value to `nil`, do not return the parent's value
+- Pass `:"override_#{attribute_name}" => false` to force the child to default to the parent
+
 # 0.0.1
 
 Initial release

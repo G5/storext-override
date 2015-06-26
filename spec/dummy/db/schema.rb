@@ -13,13 +13,13 @@
 
 ActiveRecord::Schema.define(version: 20150323042153) do
 
-  create_table "computers", force: true do |t|
+  create_table "computers", force: :cascade do |t|
     t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "phones", force: true do |t|
+  create_table "phones", force: :cascade do |t|
     t.text     "data"
     t.integer  "computer_id"
     t.datetime "created_at"
