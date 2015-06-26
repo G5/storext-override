@@ -75,8 +75,12 @@ module Storext
         ivar = "@override_#{attr}"
 
         define_method :"override_#{attr}=" do |bool|
-          destroy_key(column_name, attr) if bool == false
-          instance_variable_set(ivar, bool)
+          if [0, '0', false].include?(bool)
+            destroy_key(column_name, attr)
+            instance_variable_set(ivar, false)
+          else
+            instance_variable_set(ivar, true)
+          end
         end
 
         define_method :"override_#{attr}" do
