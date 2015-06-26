@@ -14,4 +14,3 @@ gemspec
 # gem 'debugger'
 
 gem 'pry'
-gem "storext", github: "g5/storext", branch: "make_defs_public"
