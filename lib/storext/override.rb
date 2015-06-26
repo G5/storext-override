@@ -44,6 +44,10 @@ module Storext
           attr_definition[:opts].reject { |k,v| k == :default },
         )
 
+        storext_overrider_define_reader(association_name, column_name, attr)
+      end
+
+      def storext_overrider_define_reader(association_name, column_name, attr)
         define_method attr do |*args|
           if send(column_name).has_key?(attr)
             super(*args)
