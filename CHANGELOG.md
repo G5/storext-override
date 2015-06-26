@@ -1,4 +1,4 @@
-# TBA
+# 0.1.1
 
 - Fix issue when reading from `nil` association
 
