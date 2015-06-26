@@ -44,6 +44,7 @@ module Storext
           attr_definition[:opts].reject { |k,v| k == :default },
         )
 
+        storext_overrider_define_override_control(column_name, attr)
         storext_overrider_define_reader(association_name, column_name, attr)
         storext_overrider_define_writer(column_name, attr)
       end
@@ -61,9 +62,26 @@ module Storext
 
       def storext_overrider_define_writer(column_name, attr)
         define_method :"#{attr}_with_override_control=" do |*args|
-          send(:"#{attr}_without_override_control=", *args)
+          if send(:"override_#{attr}") == false
+            destroy_key(column_name, attr)
+          else
+            send(:"#{attr}_without_override_control=", *args)
+          end
         end
         alias_method_chain :"#{attr}=", :override_control
+      end
+
+      def storext_overrider_define_override_control(column_name, attr)
+        ivar = "@override_#{attr}"
+
+        define_method :"override_#{attr}=" do |bool|
+          destroy_key(column_name, attr) if bool == false
+          instance_variable_set(ivar, bool)
+        end
+
+        define_method :"override_#{attr}" do
+          instance_variable_get(ivar)
+        end
       end
     end
 
