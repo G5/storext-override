@@ -17,6 +17,20 @@ describe Storext::Override do
     expect(phone.manufacturer).to eq "Compaq"
   end
 
+  it "can inherit attribute from any ancestor provided in :class option" do
+    computer = Komputer.create(manufacturer: "Dell")
+    phone = Phone.create(computer: computer, manufacturer: "Compaq")
+    sim_card = SimCard.create(phone: phone)
+    expect(sim_card.manufacturer).to eq "Dell"
+  end
+
+  it "can override attribute from any ancestor provided in the :class option" do
+    computer = Komputer.create(manufacturer: "Dell")
+    phone = Phone.create(computer: computer, manufacturer: "Compaq")
+    sim_card = SimCard.create(phone: phone, manufacturer: "Verizon")
+    expect(sim_card.manufacturer).to eq "Verizon"
+  end
+
   it "can override the parent using `nil`" do
     computer = Komputer.create(manufacturer: "Dell")
     phone = Phone.create(computer: computer, manufacturer: nil)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150323042153) do
+ActiveRecord::Schema.define(version: 20150818085353) do
 
   create_table "computers", force: :cascade do |t|
     t.text     "data"
@@ -22,6 +22,13 @@ ActiveRecord::Schema.define(version: 20150323042153) do
   create_table "phones", force: :cascade do |t|
     t.text     "data"
     t.integer  "computer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sim_cards", force: :cascade do |t|
+    t.text     "data"
+    t.integer  "phone_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

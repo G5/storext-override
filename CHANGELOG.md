@@ -1,3 +1,8 @@
+# TBA
+
+- Allow overriding/inheriting of storext attributes
+  of any ancestor provided in the :class option
+
 # 0.1.1
 
 - Fix issue when reading from `nil` association
