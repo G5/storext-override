@@ -24,6 +24,17 @@ class Phone < ActiveRecord::Base
 
   storext_override(:computer, :data)
 end
+
+class SimCard < ActiveRecord::Base
+  store :data, coder: JSON
+
+  belongs_to :phone
+  include Storext::Override
+
+  # If you want to override :computer, but it's a not directly associated
+  delegate :computer, to: :phone
+  storext_override(:computer, :data, class: Komputer)
+end
 ```
 
 This looks at Computer's `data` column and copies all accessors into its own, withe override ability.

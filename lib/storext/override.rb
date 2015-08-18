@@ -10,12 +10,16 @@ module Storext
     end
 
     module ClassMethods
-      def storext_override(association_name, column_name)
-        association =
-          storext_overrider_find_association(association_name)
-        association_class = association.class_name.constantize
+      def storext_override(association_name, column_name, opts = {})
+        origin_class = if opts[:class]
+                         opts[:class]
+                       else
+                         association =
+                           storext_overrider_find_association(association_name)
+                         association.class_name.constantize
+                       end
 
-        storext_definitions = association_class.storext_definitions
+        storext_definitions = origin_class.storext_definitions
         storext_definitions.each do |attr, attr_definition|
           if attr_definition[:column] == column_name
             storext_overrider_accessor(
