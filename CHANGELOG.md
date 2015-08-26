@@ -1,7 +1,6 @@
 # 0.2.0
 
-- Allow overriding/inheriting of storext attributes
-  of any ancestor provided in the :class option
+- Allow overriding/inheriting of storext attributes of any ancestor provided in the :class option
 
 # 0.1.1
 
