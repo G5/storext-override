@@ -1,4 +1,4 @@
-# TBA
+# 0.2.0
 
 - Allow overriding/inheriting of storext attributes
   of any ancestor provided in the :class option
