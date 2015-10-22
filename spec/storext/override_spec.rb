@@ -2,6 +2,54 @@ require 'spec_helper'
 
 describe Storext::Override do
 
+  let(:including_class) do
+    klass = Phone
+    klass.storext_override(:computer, :data, override_options)
+    klass
+  end
+  let(:override_options) do
+    { ignore_override_if_blank: ignore_override_if_blank }
+  end
+
+  describe '.storext_override' do
+    let(:ignore_override_if_blank) { true }
+
+    it { expect(including_class.override_options).to eq override_options }
+  end
+
+  describe 'override_options' do
+    let(:computer) do
+      Komputer.create(manufacturer: 'Compaq')
+    end
+    let(:phone) do
+      including_class.create(computer: computer)
+    end
+    let(:phone_manufacturer) { '' }
+
+    before do
+      phone.update_attributes(
+        manufacturer: phone_manufacturer,
+        override_manufacturer: true
+      )
+    end
+
+    context 'ignore_override_if_blank is true' do
+      let(:ignore_override_if_blank) { true }
+
+      it do
+        expect(phone.manufacturer).to eq computer.manufacturer
+      end
+    end
+
+    context 'ignore_override_if_blank is false' do
+      let(:ignore_override_if_blank) { false }
+
+      it do
+        expect(phone.manufacturer).to eq phone_manufacturer
+      end
+    end
+  end
+
   it "does not inherit attribute defaults and returns the parent's attribute value" do
     computer = Komputer.create(manufacturer: "not default")
     phone = Phone.create(computer: computer)
