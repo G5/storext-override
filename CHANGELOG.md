@@ -1,4 +1,4 @@
-# TBA
+# 0.3.0
 
 - Add `:ignore_override_if_blank` option
 
