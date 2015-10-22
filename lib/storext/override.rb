@@ -9,6 +9,11 @@ module Storext
       include Storext.model
     end
 
+    def storext_override_discard_value?(attr)
+      send(:"#{attr}_without_parent_default").blank? &&
+        self.class.override_options[:ignore_override_if_blank]
+    end
+
     module ClassMethods
 
       attr_accessor :override_options
@@ -88,17 +93,12 @@ module Storext
         ivar = "@override_#{attr}"
 
         define_method :"override_#{attr}=" do |bool|
-          if [0, '0', false].include?(bool) || discard_value?
+          if [0, '0', false].include?(bool) || storext_override_discard_value?(attr)
             destroy_key(column_name, attr)
             instance_variable_set(ivar, false)
           else
             instance_variable_set(ivar, true)
           end
-        end
-
-        define_method :discard_value? do
-          send(:"#{attr}_without_parent_default").blank? &&
-            self.class.override_options[:ignore_override_if_blank]
         end
 
         define_method :"override_#{attr}" do
