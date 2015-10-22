@@ -1,3 +1,7 @@
+# TBA
+
+- Add `:ignore_override_if_blank` option
+
 # 0.2.0
 
 - Allow overriding/inheriting of storext attributes of any ancestor provided in the :class option

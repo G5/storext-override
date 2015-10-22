@@ -10,9 +10,16 @@ module Storext
     end
 
     module ClassMethods
-      def storext_override(association_name, column_name, opts = {})
-        origin_class = if opts[:class]
-                         opts[:class]
+
+      attr_accessor :override_options
+
+      def storext_override(association_name, column_name, override_options = {})
+        self.override_options = {
+                                  ignore_override_if_blank: false
+                                }.merge(override_options)
+
+        origin_class = if override_options[:class]
+                         override_options[:class]
                        else
                          association =
                            storext_overrider_find_association(association_name)
@@ -81,12 +88,17 @@ module Storext
         ivar = "@override_#{attr}"
 
         define_method :"override_#{attr}=" do |bool|
-          if [0, '0', false].include?(bool)
+          if [0, '0', false].include?(bool) || discard_value?
             destroy_key(column_name, attr)
             instance_variable_set(ivar, false)
           else
             instance_variable_set(ivar, true)
           end
+        end
+
+        define_method :discard_value? do
+          send(:"#{attr}_without_parent_default").blank? &&
+            self.class.override_options[:ignore_override_if_blank]
         end
 
         define_method :"override_#{attr}" do
