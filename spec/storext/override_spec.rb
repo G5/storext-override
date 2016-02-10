@@ -11,6 +11,12 @@ describe Storext::Override do
     { ignore_override_if_blank: ignore_override_if_blank }
   end
 
+  describe 'inclusion' do
+    it 'does not overwrite storext_options set in the parent' do
+      expect(SuperKomputer.new.options).to eq({ some: :options }.to_s)
+    end
+  end
+
   describe '.storext_override' do
     let(:ignore_override_if_blank) { true }
 

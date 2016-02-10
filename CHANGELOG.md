@@ -1,3 +1,7 @@
+# TBA
+
+- Fix: if a subclass invokes `include Storext::Override` the `storext_options` inherited from the parent is not wiped out
+
 # 0.3.0
 
 - Add `:ignore_override_if_blank` option
