@@ -6,7 +6,7 @@ module Storext
     extend ActiveSupport::Concern
 
     included do
-      include Storext.model
+      include Storext.model unless self.respond_to? :storext_options
     end
 
     def storext_override_discard_value?(attr)
