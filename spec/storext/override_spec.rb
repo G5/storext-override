@@ -7,6 +7,9 @@ describe Storext::Override do
     klass.storext_override(:computer, :data, override_options)
     klass
   end
+  let(:including_class_subclass) do
+    Class.new(including_class)
+  end
   let(:override_options) do
     { ignore_override_if_blank: ignore_override_if_blank }
   end
@@ -21,6 +24,11 @@ describe Storext::Override do
     let(:ignore_override_if_blank) { true }
 
     it { expect(including_class.override_options).to eq override_options }
+
+    it "propagates the storext attributes to subclasses" do
+      expect(including_class_subclass.storext_definitions)
+        .to match(including_class.storext_definitions)
+    end
   end
 
   describe 'override_options' do

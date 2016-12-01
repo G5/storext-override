@@ -16,7 +16,7 @@ module Storext
 
     module ClassMethods
 
-      attr_accessor :override_options
+      cattr_accessor :override_options
 
       def storext_override(association_name, column_name, override_options = {})
         self.override_options = {
