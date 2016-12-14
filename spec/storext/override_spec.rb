@@ -28,13 +28,9 @@ describe Storext::Override do
       Komputer.create(manufacturer: 'Compaq')
     end
     let(:phone) do
-      including_class.create(computer: computer)
-    end
-    let(:phone_manufacturer) { '' }
-
-    before do
-      phone.update_attributes(
-        manufacturer: phone_manufacturer,
+      including_class.create(
+        computer: computer,
+        manufacturer: '',
         override_manufacturer: true
       )
     end
@@ -51,7 +47,7 @@ describe Storext::Override do
       let(:ignore_override_if_blank) { false }
 
       it do
-        expect(phone.manufacturer).to eq phone_manufacturer
+        expect(phone.manufacturer).to eq ''
       end
     end
   end
