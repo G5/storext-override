@@ -1,3 +1,7 @@
+# TBA
+
+- Make subclasses inherit storext definitions
+
 # 0.4.0
 
 - Fix: if a subclass invokes `include Storext::Override` the `storext_options` inherited from the parent is not wiped out
