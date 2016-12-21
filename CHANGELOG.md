@@ -1,6 +1,7 @@
-# TBA
+# 1.0.0
 
 - Make subclasses inherit storext definitions
+- Set minimum storext version to 2.2.2
 
 # 0.4.0
 
