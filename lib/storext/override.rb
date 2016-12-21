@@ -94,6 +94,7 @@ module Storext
 
         define_method :"override_#{attr}=" do |bool|
           if [0, '0', false].include?(bool) || storext_override_discard_value?(attr)
+            binding.pry if self.class == Phone
             destroy_key(column_name, attr)
             instance_variable_set(ivar, false)
           else

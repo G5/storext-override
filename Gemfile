@@ -14,3 +14,5 @@ gemspec
 # gem 'debugger'
 
 gem 'pry'
+gem 'storext', path: "/vagrant/storext"
+

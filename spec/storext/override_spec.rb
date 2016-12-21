@@ -31,7 +31,7 @@ describe Storext::Override do
       including_class.create(
         computer: computer,
         manufacturer: '',
-        override_manufacturer: true
+        override_manufacturer: true,
       )
     end
 
