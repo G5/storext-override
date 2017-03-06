@@ -11,6 +11,7 @@ module Storext
 
     def storext_override_discard_value?(attr)
       send(:"#{attr}_without_parent_default").blank? &&
+        send(:"#{attr}_without_parent_default") != false &&
         self.class.override_options[:ignore_override_if_blank]
     end
 
