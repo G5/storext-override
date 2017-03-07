@@ -43,7 +43,9 @@ describe Storext::Override do
     before do
       phone.update_attributes(
         manufacturer: phone_manufacturer,
-        override_manufacturer: true
+        override_manufacturer: true,
+        manufactured: false,
+        override_manufactured: true,
       )
     end
 
@@ -53,6 +55,10 @@ describe Storext::Override do
       it do
         expect(phone.manufacturer).to eq computer.manufacturer
       end
+
+      it "does not delete keys with false boolean data" do
+        expect(phone.manufactured).to eq false
+      end
     end
 
     context 'ignore_override_if_blank is false' do
@@ -60,6 +66,10 @@ describe Storext::Override do
 
       it do
         expect(phone.manufacturer).to eq phone_manufacturer
+      end
+
+      it "does not delete keys with false boolean data" do
+        expect(phone.manufactured).to eq false
       end
     end
   end

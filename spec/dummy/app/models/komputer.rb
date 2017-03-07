@@ -5,5 +5,6 @@ class Komputer < ActiveRecord::Base
 
   store_attributes :data do
     manufacturer String, default: "IBM"
+    manufactured Boolean, default: true
   end
 end
