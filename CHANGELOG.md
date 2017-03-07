@@ -1,3 +1,6 @@
+# 1.1.0
+- False values should be saved and not ignored.
+
 # 1.0.0
 
 - Make subclasses inherit storext definitions
