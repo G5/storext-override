@@ -76,7 +76,8 @@ module Storext
             end
           end
         end
-        alias_method_chain :"#{attr}", :parent_default
+        alias_method :"#{attr}_without_parent_default", :"#{attr}"
+        alias_method :"#{attr}", :"#{attr}_with_parent_default"
       end
 
       def storext_overrider_define_writer(column_name, attr)
@@ -87,7 +88,8 @@ module Storext
             send(:"#{attr}_without_override_control=", *args)
           end
         end
-        alias_method_chain :"#{attr}=", :override_control
+        alias_method :"#{attr}_without_override_control=", :"#{attr}="
+        alias_method :"#{attr}=", :"#{attr}_with_override_control="
       end
 
       def storext_overrider_define_override_control(column_name, attr)
