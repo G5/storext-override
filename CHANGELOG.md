@@ -1,3 +1,7 @@
+# 1.1.1
+- Replace `alias_method_chain` with `alias_method`
+  - `alias_method_chain` is deprecated in Rails5
+
 # 1.1.0
 - False values should be saved and not ignored.
 
